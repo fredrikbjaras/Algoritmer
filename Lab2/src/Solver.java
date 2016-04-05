@@ -37,34 +37,40 @@ public class Solver {
 	}
 
 	private void parseInput() {
-		while (scan.hasNextLine()) {
+		while (scan.hasNextLine() && scan.hasNext()) {
 			String root = scan.next();
 			String target = scan.next();
 			que = new ArrayDeque<String>();
-			visited = new ArrayList<String>();
-			solve(root);
-			if(lengthTo.get(target) == null){
-				System.out.println(-1);
+			
+			int temp = solve(root, target);
+			if(temp > 0){
+				System.out.println(temp);
 			}else{
-				System.out.println(lengthTo.get(target));
+				System.out.println(-1);
 			}
 			
 		}
 	}
 
-	private void solve(String root) {
+	private int solve(String root, String target) {
 		lengthTo = new HashMap<String, Integer>();
+		visited = new ArrayList<String>();
 		visited.add(root);
 		lengthTo.put(root, 0);
 		que.push(root);
 		while(!que.isEmpty()){
 			String node = que.pop();
 			for(String string : graph.get(node)){
-				if(!visited.contains(string)){
+				if(string == target){
+					return lengthTo.get(node) + 1;
+				}else if(!visited.contains(string)){
 					lengthTo.put(string, lengthTo.get(node) + 1);
+					visited.add(string);
+					que.push(string);
 				}
 			}
 		}
+		return lengthTo.get(target);
 //		if (!visited.contains(root)) {
 //			que.add(root);
 //			visited.add(root);
