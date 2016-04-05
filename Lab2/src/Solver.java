@@ -17,11 +17,12 @@ public class Solver {
 	//
 
 	private Scanner scan;
-	private String target;
 	private HashMap<String, ArrayList<String>> graph;
 	private ArrayDeque<String> que;
 	private boolean state;
-	private int dist = 0;
+	private ArrayList<String> visited;
+	private HashMap<String, Integer> lengthTo;
+	
 
 	public Solver(String path, HashMap<String, ArrayList<String>> graph) {
 		this.graph = graph;
@@ -38,29 +39,47 @@ public class Solver {
 	private void parseInput() {
 		while (scan.hasNextLine()) {
 			String root = scan.next();
-			target = scan.next();
+			String target = scan.next();
 			que = new ArrayDeque<String>();
+			visited = new ArrayList<String>();
+			solve(root);
+			if(lengthTo.get(target) == null){
+				System.out.println(-1);
+			}else{
+				System.out.println(lengthTo.get(target));
+			}
+			
 		}
 	}
 
-	////// DIRECTED GRAPHS!!!///////
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	// !!
-	//
-	private void solve(String node) {
-		que.add(node);
-		while (!que.isEmpty()) {
-			ArrayList<String> list = graph.get(que.poll());
-			int size = list.size();
-			for (String string : list) {
-				que.add(string);
+	private void solve(String root) {
+		lengthTo = new HashMap<String, Integer>();
+		visited.add(root);
+		lengthTo.put(root, 0);
+		que.push(root);
+		while(!que.isEmpty()){
+			String node = que.pop();
+			for(String string : graph.get(node)){
+				if(!visited.contains(string)){
+					lengthTo.put(string, lengthTo.get(node) + 1);
+				}
 			}
 		}
+//		if (!visited.contains(root)) {
+//			que.add(root);
+//			visited.add(root);
+//			while (!que.isEmpty()) {
+//				ArrayList<String> list = graph.get(que.pop());
+//				int counter = 0;
+//				for (String string : list) {
+//					int temp = solve(, target, depth + 1);
+//					if(temp < counter){
+//						counter = temp;
+//					}
+//				}
+//			}
+//		}
+
 	}
+
 }
