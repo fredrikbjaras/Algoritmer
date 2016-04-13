@@ -1,8 +1,8 @@
 
 @SuppressWarnings("rawtypes")
 public class Node implements Comparable{
-	private int distance;
-	private String name;
+	protected int distance;
+	protected String name;
 	public Node(String name, int distance){
 		this.name = name;
 		this.distance = distance;
@@ -26,6 +26,14 @@ public class Node implements Comparable{
 			}
 		}
 		return 1;
+	}
+	
+	@Override
+	public boolean equals(Object node){
+			if(((Node) node).getName().compareTo(name) == 0){
+				return true;
+			}
+		return false;
 	}
 
 }

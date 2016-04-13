@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class Parser {
 	private Scanner scan;
-	private String path;
 	private HashMap<String, ArrayList<Node>> graph;
 
 	public Parser(String path) {
@@ -17,12 +16,14 @@ public class Parser {
 		}
 	}
 
-	public void parseInput() {
+	public HashMap<String, ArrayList<Node>> parseInput() {
 		graph = new HashMap<String, ArrayList<Node>>();
 		String line = scan.nextLine();
 		while (!line.endsWith("]")) {
 			line = line.replaceAll("\"", "");
-			line = line.substring(0,line.length()-1);
+			if(line.endsWith(" ")){
+				line = line.substring(0,line.length()-1);
+			}
 			graph.put(line, new ArrayList<Node>());
 			line = scan.nextLine();
 		}
@@ -35,9 +36,12 @@ public class Parser {
 			String dest = temp[0];
 			String dist = temp[1].replaceAll("]", "");
 			int d = Integer.parseInt(dist);
+			dest = dest.substring(0, dest.length() - 1);
 			graph.get(from).add(new Node(dest, d));
+			graph.get(dest).add(new Node(from, d));
 			line = scan.nextLine();
 		}
+		return graph;
 	}
 
 }
