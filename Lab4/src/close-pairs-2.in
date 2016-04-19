@@ -1,0 +1,10 @@
+NAME : close_pairs-2
+COMMENT : 
+TYPE : 
+DIMENSION : 3
+EDGE_WEIGHT_TYPE :
+NODE_COORD_SECTION
+romeo 0 0
+juliet 0 10
+far 0 100
+EOF
