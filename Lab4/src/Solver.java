@@ -9,9 +9,9 @@ public class Solver {
 	}
 
 	private double solve(int left, int right) {
-		int mid = right / 2;
-		double midLine = ((list.get(mid).getX() + list.get(mid + 1).getX()))/2;
+		int mid = (left + right) / 2;
 		if (right != left) {
+			double midLine = ((list.get(mid).getX() + list.get(mid + 1).getX()))/2;
 			double minLeft = solve(left, mid);
 			double minRight = solve(mid + 1, right);
 			double min;
@@ -74,7 +74,7 @@ public class Solver {
 	private double checkMin(ArrayList<Point> yList){
 		double min = Double.MAX_VALUE;
 		for(int i = 0; i < yList.size(); i++){
-			for(int j = i + 1; (j < (i + 12)) && (j < yList.size() - 1); j++){
+			for(int j = i + 1; (j < (i + 12)) && (j < yList.size()); j++){
 				if(yList.get(i).distance(yList.get(j)) < min){
 					min = yList.get(i).distance(yList.get(j));
 				}
