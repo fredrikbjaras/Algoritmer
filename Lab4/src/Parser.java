@@ -8,6 +8,7 @@ public class Parser {
 	
 	public Parser(String path){
 		try {
+			System.out.println("PATH: " + path);
 			scan = new Scanner(new File(path));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -21,11 +22,10 @@ public class Parser {
 			}
 		}
 		ArrayList<Point> points = new ArrayList<Point>();
-		String line = scan.nextLine();
-		while(scan.hasNextLine() && !line.equals("EOF")){
-			String [] values = line.split(" ");
-			points.add(new Point(values[0],Double.parseDouble(values[1]), Double.parseDouble(values[2])));
-			line = scan.nextLine();
+		String index = scan.next();
+		while(scan.hasNextLine() && !index.equals("EOF")){
+			points.add(new Point(index, Double.parseDouble(scan.next()), Double.parseDouble(scan.next())));
+			index = scan.next();
 		}
 		points.sort(null);
 		return points;
