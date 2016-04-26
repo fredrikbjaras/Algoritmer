@@ -8,7 +8,6 @@ public class Parser {
 	
 	public Parser(String path){
 		try {
-			System.out.println("PATH: " + path);
 			scan = new Scanner(new File(path));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -18,14 +17,18 @@ public class Parser {
 	
 	public ArrayList<Point> parse(){
 		if(scan.nextLine().contains("NAME")){
-			while(!scan.nextLine().equals("NODE_COORD_SECTION")){
+			while(!scan.nextLine().contains("NODE_COORD_SECTION")){
 			}
 		}
 		ArrayList<Point> points = new ArrayList<Point>();
 		String index = scan.next();
 		while(scan.hasNextLine() && !index.equals("EOF")){
 			points.add(new Point(index, Double.parseDouble(scan.next()), Double.parseDouble(scan.next())));
-			index = scan.next();
+			if(scan.hasNext()){
+				index = scan.next();
+			}else{
+				index = "EOF";
+			}
 		}
 		points.sort(null);
 		return points;
