@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ClosestPoint {
 
@@ -10,7 +11,7 @@ public class ClosestPoint {
 			String path = args[i].substring(temp + 1);
 			path = "../data/" + path + ": ";
 			System.out.print(path);
-			ArrayList<Point> points = parse.parse();
+			HashMap<Integer, Point> points = parse.parse();
 			System.out.print(points.size() + " ");
 			solver.solve(points);
 		}

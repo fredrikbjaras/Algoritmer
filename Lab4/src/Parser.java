@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Parser {
@@ -15,7 +16,7 @@ public class Parser {
 		}
 	}
 	
-	public ArrayList<Point> parse(){
+	public HashMap<Integer, Point> parse(){
 		if(scan.nextLine().contains("NAME")){
 			while(!scan.nextLine().contains("NODE_COORD_SECTION")){
 			}
@@ -31,7 +32,11 @@ public class Parser {
 			}
 		}
 		points.sort(null);
-		return points;
+		HashMap<Integer, Point> sorted = new HashMap<Integer, Point>();
+		for(int i = 0; i < points.size(); i++){
+			sorted.put(i, points.get(i));
+		}
+		return sorted;
 	}
 
 }

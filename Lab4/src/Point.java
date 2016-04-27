@@ -1,5 +1,5 @@
 
-public class Point implements Comparable{
+public class Point implements Comparable<Point>{
 	private String name;
 	private double x;
 	private double y;
@@ -29,13 +29,14 @@ public class Point implements Comparable{
 	}
 
 	@Override
-	public int compareTo(Object o) {
-		if(x < ((Point) o).getX()){
+	public int compareTo(Point o) {
+		if(x < o.getX()){
 			return -1;
-		}else if (x == ((Point) o).getX()){
+		}else if (x == o.getX()){
 			return 0;
 		}
 		return 1;
 	}
+
 
 }

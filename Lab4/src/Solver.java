@@ -1,9 +1,11 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 
 public class Solver {
-	private ArrayList<Point> list;
+	private HashMap<Integer, Point> list;
 
-	public void solve(ArrayList<Point> list) {
+	public void solve(HashMap<Integer, Point> list) {
 		this.list = list;
 		System.out.println(solve(0, list.size() - 1));
 	}
@@ -55,7 +57,14 @@ public class Solver {
 	}
 
 	private ArrayList<Point> sortByY(int left, int right){
-		ArrayList<Point> yList = new ArrayList<Point>();
+		 ArrayList<Point> yList = new ArrayList<Point>();
+		for(int i = left; i < right + 1; i++){
+			yList.add(list.get(i));
+		}
+		yList.sort(new Ycomparator());
+		return yList;
+		/*
+		
 		yList.add(list.get(left));
 		for(int i = left + 1; i < right + 1; i++){
 			for(int j = yList.size()-1; j >= 0; j--){
@@ -69,6 +78,7 @@ public class Solver {
 			}
 		}
 		return yList;
+		*/
 	}
 	
 	private double checkMin(ArrayList<Point> yList){
